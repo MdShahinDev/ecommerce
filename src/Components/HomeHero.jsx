@@ -1,14 +1,14 @@
-import React from 'react'
-import Banner from '../assets/Banner-1.jpg';
+import React from "react";
+import Banner from "../assets/Banner-1.jpg";
 
 const HomeHero = () => {
   return (
     <>
-    <div className="homebanner pb-3">
-        <img src={Banner} className='h-screen w-full' alt="" />
-    </div>
+      <div className="home-banner mb-8">
+        <img src={Banner} alt="" />
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default HomeHero
+export default HomeHero;
