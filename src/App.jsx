@@ -8,6 +8,7 @@ import Wishlist from './Pages/Wishlist';
 import Cart from './Pages/Cart';
 import MyAccount from './Pages/MyAccount';
 import RootLayout from './Components/RootLayout';
+import Checkout from './Pages/Checkout';
 function App() {
   let myrouter = createBrowserRouter(createRoutesFromElements(
     <Route element={<RootLayout/>}>
@@ -19,6 +20,7 @@ function App() {
     <Route path='/wishlist' element={<Wishlist/>} />
     <Route path='/cart' element={<Cart/>} />
     <Route path='/my-acount' element={<MyAccount/>} />
+    <Route path='/checkout' element={<Checkout/>} />
     </Route>
   ))
   return (
