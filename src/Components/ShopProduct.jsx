@@ -19,20 +19,37 @@ const ShopProduct = () => {
     setCategoryItem(filterProduct);
     
   }
+  let [searchResult, setSearchResult] = useState([]);
+  const handleSearch = (e)=>{
+    let searchProduct = data.filter((item)=>item.title.toLowerCase().startsWith(e.target.value.toLowerCase()));
+    setSearchResult(searchProduct);
+    if(e.target.value ==''){
+      setSearchResult([]);
+    }
+    
+  }
   
   return (
     <>
       <div className="shop-page container mx-auto flex flex-col lg:flex-row gap-4">
         <div className="sidebar w-full px-2 lg:w-1/4 order-2 lg:order-1">
-          <div className="search-box pb-4">
+          <div className="search-box pb-4 relative">
             <h2 className="font-Crimson text-2xl font-semibold mb-2">
               Search Product
             </h2>
-            <input
-              type="text"
-              className="py-2 px-1 w-full border rounded-sm"
-              placeholder="Search Product"
-            />
+            <input onChange={handleSearch} type="text" className="py-2 px-1 w-full border rounded-sm" placeholder="Search Product" />
+            {searchResult.length >0 &&
+            <div className="result absolute top-20  left-0 bg-red-400 px-2 mb-4 max-h-[500px] overflow-y-auto">
+              
+                {searchResult.map((item)=>(
+                  <div key={item.id} className="flex gap-1 items-center">
+                    <img className="w-20" src={item.thumbnail} alt="" />
+                    <h3>{item.title}</h3>
+                  </div>
+                ))}
+              
+            </div>
+            }
           </div>
           <div className="product-category pb-4">
             <h2 className="font-Crimson text-2xl font-semibold mb-2">
