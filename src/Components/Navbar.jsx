@@ -5,13 +5,19 @@ import { FaRegHeart } from "react-icons/fa6";
 import { IoBagHandleSharp } from "react-icons/io5";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaBars } from "react-icons/fa6";
+import { useSelector } from 'react-redux';
 
 const Navbar = () => { const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
-
+  let cartData = useSelector((state) => state.cartItemManager.cartItems);
+  let totalQty = 0;
+  for (let i = 0; i < cartData.length; i++) {
+    let item = cartData[i];
+    totalQty += item.qty;
+  }
   return (
     <div className="navbar sticky top-0 z-50 bg-white border-b-2">
       <div className="container mx-auto">
@@ -51,7 +57,7 @@ const Navbar = () => { const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(
                 </Link>
               </li>
               <div className="qty-bg absolute right-8 top-1 bg-Primary text-white w-4 h-4 rounded-full text-xs">
-                <div className="qty-number text-center align-middle">10</div>
+                <div className="qty-number text-center align-middle">{totalQty}</div>
               </div>
               <li className="transition-colors hover:text-Primary">
                 <Link to="/my-account">

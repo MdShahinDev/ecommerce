@@ -9,6 +9,7 @@ import Cart from './Pages/Cart';
 import MyAccount from './Pages/MyAccount';
 import RootLayout from './Components/RootLayout';
 import Checkout from './Pages/Checkout';
+import ProductDetails from './Pages/ProductDetails';
 function App() {
   let myrouter = createBrowserRouter(createRoutesFromElements(
     <Route element={<RootLayout/>}>
@@ -21,6 +22,7 @@ function App() {
     <Route path='/cart' element={<Cart/>} />
     <Route path='/my-acount' element={<MyAccount/>} />
     <Route path='/checkout' element={<Checkout/>} />
+    <Route path='/shop/:id' element={<ProductDetails/>} />
     </Route>
   ))
   return (

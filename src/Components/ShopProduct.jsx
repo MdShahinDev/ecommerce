@@ -1,9 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
-import productImg from "../assets/Product-1.png";
+import { ToastContainer, toast,Slide  } from "react-toastify";
 import { IoCartOutline, IoSearch } from "react-icons/io5";
 import { IoListSharp, IoGrid } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa6";
 import { apiData } from "./ContextApi";
+import { useDispatch } from "react-redux";
+import { addToCart } from "./Slices/CartSlice";
+import { Link } from "react-router-dom";
+
 const ShopProduct = () => {
   const data = useContext(apiData);
 
@@ -59,6 +63,13 @@ const ShopProduct = () => {
   };
   const handlePerPage = (e) => {
     setPerPage(e.target.value || 30);
+  };
+
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (item) => {
+    dispatch(addToCart({ ...item, qty: 1 }));
+    toast.success(' Wow so easy!');
   };
   return (
     <>
@@ -142,22 +153,37 @@ const ShopProduct = () => {
                   key={item.id}
                   className="single-product sm:w-1/2 md:w-1/3 lg:w-1/4 px-2 mb-4"
                 >
+                  
                   <div className="bg-white shadow rounded relative group">
-                    <img
-                      className="mb-4 bg-[#f6f7fb] w-full cursor-pointer"
-                      src={item.thumbnail}
-                      alt=""
-                    />
+                    <Link to={`/shop/${(item.id)}`}><img className="mb-4 bg-[#f6f7fb] w-full cursor-pointer" src={item.thumbnail} alt="" /></Link>
                     <div className="quick-panel absolute top-48 left-4 flex flex-col gap-5 text-xl opacity-0 -translate-x-5      transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-4">
                       <IoSearch className="cursor-pointer hover:text-Primary transition-all" />
-                      <IoCartOutline className="cursor-pointer hover:text-Primary transition-all" />
+                      <IoCartOutline
+                        onClick={() => handleAddToCart(item)}
+                        className="cursor-pointer hover:text-Primary transition-all"
+                      />
+                      <ToastContainer
+                        position="top-right"
+                        autoClose={1000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick={false}
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover={false}
+                        theme="dark"
+                        transition={Slide}
+                      />
                       <FaRegHeart className="cursor-pointer hover:text-Primary transition-all" />
                     </div>
 
                     <div className="product-title text-center mb-4">
+                      <Link to={`/shop/${(item.id)}`}>
                       <h2 className="font-Crimson text-2xl font-semibold transition-all hover:text-Primary cursor-pointer">
                         {item.title}
                       </h2>
+                      </Link>
                     </div>
                     <div className="product-sku text-center mb-4">
                       <p>
@@ -169,6 +195,7 @@ const ShopProduct = () => {
                       <p>${item.price}</p>
                     </div>
                   </div>
+                  
                 </div>
               ))
             ) : (
@@ -179,20 +206,40 @@ const ShopProduct = () => {
                     className="single-product sm:w-1/2 md:w-1/3 lg:w-1/4 px-2 mb-4"
                   >
                     <div className="bg-white shadow rounded relative group">
+                      <Link to={`/shop/${(item.id)}`}>
                       <img
                         className="mb-4 bg-[#f6f7fb] w-full cursor-pointer"
                         src={item.thumbnail}
                         alt=""
                       />
+                      </Link>
                       <div className="quick-panel absolute top-48 left-4 flex flex-col gap-5 text-xl opacity-0 -translate-x-5 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-4">
                         <IoSearch className="cursor-pointer hover:text-Primary transition-all" />
-                        <IoCartOutline className="cursor-pointer hover:text-Primary transition-all" />
+                        <IoCartOutline
+                          onClick={() => handleAddToCart(item)}
+                          className="cursor-pointer hover:text-Primary transition-all"
+                        />
+                         <ToastContainer
+                        position="top-right"
+                        autoClose={1000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick={false}
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover={false}
+                        theme="dark"
+                        transition={Slide}
+                      />
                         <FaRegHeart className="cursor-pointer hover:text-Primary transition-all" />
                       </div>
                       <div className="product-title text-center mb-4">
+                        <Link to={`/shop/${(item.id)}`}>
                         <h2 className="font-Crimson text-2xl font-semibold transition-all hover:text-Primary cursor-pointer">
                           {item.title}
                         </h2>
+                        </Link>
                       </div>
                       <div className="product-sku text-center mb-4">
                         <p>
